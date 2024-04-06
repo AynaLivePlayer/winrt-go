@@ -597,13 +597,6 @@ func (impl *MediaPlayer) SetSurfaceSize(size foundation.Size) error {
 	return v.SetSurfaceSize(size)
 }
 
-//func (impl *MediaPlayer) GetSurface(compositor *composition.Compositor) (*MediaPlayerSurface, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiMediaPlayer4))
-//	defer itf.Release()
-//	v := (*iMediaPlayer4)(unsafe.Pointer(itf))
-//	return v.GetSurface(compositor)
-//}
-
 func (impl *MediaPlayer) AddVideoEffectWithSettings(activatableClassId string, effectOptional bool, effectConfiguration *collections.IPropertySet) error {
 	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiMediaPlayerEffects2))
 	defer itf.Release()
@@ -2045,22 +2038,6 @@ func (v *iMediaPlayer4) SetSurfaceSize(size foundation.Size) error {
 
 	return nil
 }
-
-//func (v *iMediaPlayer4) GetSurface(compositor *composition.Compositor) (*MediaPlayerSurface, error) {
-//	var out *MediaPlayerSurface
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().GetSurface,
-//		uintptr(unsafe.Pointer(v)),          // this
-//		uintptr(unsafe.Pointer(compositor)), // in composition.Compositor
-//		uintptr(unsafe.Pointer(&out)),       // out MediaPlayerSurface
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
 
 const GUIDiMediaPlayerEffects2 string = "fa419a79-1bbe-46c5-ae1f-8ee69fb3c2c7"
 const SignatureiMediaPlayerEffects2 string = "{fa419a79-1bbe-46c5-ae1f-8ee69fb3c2c7}"

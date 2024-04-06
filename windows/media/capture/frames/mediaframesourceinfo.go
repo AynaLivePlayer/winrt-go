@@ -6,13 +6,9 @@
 package frames
 
 import (
-	"syscall"
 	"unsafe"
 
 	"github.com/go-ole/go-ole"
-	"github.com/saltosystems/winrt-go/windows/devices/enumeration"
-	"github.com/saltosystems/winrt-go/windows/foundation/collections"
-	"github.com/saltosystems/winrt-go/windows/media/capture"
 )
 
 const SignatureMediaFrameSourceInfo string = "rc(Windows.Media.Capture.Frames.MediaFrameSourceInfo;{87bdc9cd-4601-408f-91cf-038318cd0af3})"
@@ -20,64 +16,6 @@ const SignatureMediaFrameSourceInfo string = "rc(Windows.Media.Capture.Frames.Me
 type MediaFrameSourceInfo struct {
 	ole.IUnknown
 }
-
-func (impl *MediaFrameSourceInfo) GetId() (string, error) {
-	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiMediaFrameSourceInfo))
-	defer itf.Release()
-	v := (*iMediaFrameSourceInfo)(unsafe.Pointer(itf))
-	return v.GetId()
-}
-
-func (impl *MediaFrameSourceInfo) GetMediaStreamType() (capture.MediaStreamType, error) {
-	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiMediaFrameSourceInfo))
-	defer itf.Release()
-	v := (*iMediaFrameSourceInfo)(unsafe.Pointer(itf))
-	return v.GetMediaStreamType()
-}
-
-func (impl *MediaFrameSourceInfo) GetSourceKind() (MediaFrameSourceKind, error) {
-	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiMediaFrameSourceInfo))
-	defer itf.Release()
-	v := (*iMediaFrameSourceInfo)(unsafe.Pointer(itf))
-	return v.GetSourceKind()
-}
-
-func (impl *MediaFrameSourceInfo) GetSourceGroup() (*MediaFrameSourceGroup, error) {
-	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiMediaFrameSourceInfo))
-	defer itf.Release()
-	v := (*iMediaFrameSourceInfo)(unsafe.Pointer(itf))
-	return v.GetSourceGroup()
-}
-
-func (impl *MediaFrameSourceInfo) GetDeviceInformation() (*enumeration.DeviceInformation, error) {
-	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiMediaFrameSourceInfo))
-	defer itf.Release()
-	v := (*iMediaFrameSourceInfo)(unsafe.Pointer(itf))
-	return v.GetDeviceInformation()
-}
-
-func (impl *MediaFrameSourceInfo) GetProperties() (*collections.IMapView, error) {
-	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiMediaFrameSourceInfo))
-	defer itf.Release()
-	v := (*iMediaFrameSourceInfo)(unsafe.Pointer(itf))
-	return v.GetProperties()
-}
-
-
-func (impl *MediaFrameSourceInfo) GetProfileId() (string, error) {
-	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiMediaFrameSourceInfo2))
-	defer itf.Release()
-	v := (*iMediaFrameSourceInfo2)(unsafe.Pointer(itf))
-	return v.GetProfileId()
-}
-
-func (impl *MediaFrameSourceInfo) GetVideoProfileMediaDescription() (*collections.IVectorView, error) {
-	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiMediaFrameSourceInfo2))
-	defer itf.Release()
-	v := (*iMediaFrameSourceInfo2)(unsafe.Pointer(itf))
-	return v.GetVideoProfileMediaDescription()
-}
-
 
 const GUIDiMediaFrameSourceInfo string = "87bdc9cd-4601-408f-91cf-038318cd0af3"
 const SignatureiMediaFrameSourceInfo string = "{87bdc9cd-4601-408f-91cf-038318cd0af3}"
@@ -102,99 +40,6 @@ func (v *iMediaFrameSourceInfo) VTable() *iMediaFrameSourceInfoVtbl {
 	return (*iMediaFrameSourceInfoVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-func (v *iMediaFrameSourceInfo) GetId() (string, error) {
-	var outHStr ole.HString
-	hr, _, _ := syscall.SyscallN(
-		v.VTable().GetId,
-		uintptr(unsafe.Pointer(v)),        // this
-		uintptr(unsafe.Pointer(&outHStr)), // out string
-	)
-
-	if hr != 0 {
-		return "", ole.NewError(hr)
-	}
-
-	out := outHStr.String()
-	ole.DeleteHString(outHStr)
-	return out, nil
-}
-
-func (v *iMediaFrameSourceInfo) GetMediaStreamType() (capture.MediaStreamType, error) {
-	var out capture.MediaStreamType
-	hr, _, _ := syscall.SyscallN(
-		v.VTable().GetMediaStreamType,
-		uintptr(unsafe.Pointer(v)),    // this
-		uintptr(unsafe.Pointer(&out)), // out capture.MediaStreamType
-	)
-
-	if hr != 0 {
-		return capture.MediaStreamTypeVideoPreview, ole.NewError(hr)
-	}
-
-	return out, nil
-}
-
-func (v *iMediaFrameSourceInfo) GetSourceKind() (MediaFrameSourceKind, error) {
-	var out MediaFrameSourceKind
-	hr, _, _ := syscall.SyscallN(
-		v.VTable().GetSourceKind,
-		uintptr(unsafe.Pointer(v)),    // this
-		uintptr(unsafe.Pointer(&out)), // out MediaFrameSourceKind
-	)
-
-	if hr != 0 {
-		return MediaFrameSourceKindCustom, ole.NewError(hr)
-	}
-
-	return out, nil
-}
-
-func (v *iMediaFrameSourceInfo) GetSourceGroup() (*MediaFrameSourceGroup, error) {
-	var out *MediaFrameSourceGroup
-	hr, _, _ := syscall.SyscallN(
-		v.VTable().GetSourceGroup,
-		uintptr(unsafe.Pointer(v)),    // this
-		uintptr(unsafe.Pointer(&out)), // out MediaFrameSourceGroup
-	)
-
-	if hr != 0 {
-		return nil, ole.NewError(hr)
-	}
-
-	return out, nil
-}
-
-func (v *iMediaFrameSourceInfo) GetDeviceInformation() (*enumeration.DeviceInformation, error) {
-	var out *enumeration.DeviceInformation
-	hr, _, _ := syscall.SyscallN(
-		v.VTable().GetDeviceInformation,
-		uintptr(unsafe.Pointer(v)),    // this
-		uintptr(unsafe.Pointer(&out)), // out enumeration.DeviceInformation
-	)
-
-	if hr != 0 {
-		return nil, ole.NewError(hr)
-	}
-
-	return out, nil
-}
-
-func (v *iMediaFrameSourceInfo) GetProperties() (*collections.IMapView, error) {
-	var out *collections.IMapView
-	hr, _, _ := syscall.SyscallN(
-		v.VTable().GetProperties,
-		uintptr(unsafe.Pointer(v)),    // this
-		uintptr(unsafe.Pointer(&out)), // out collections.IMapView
-	)
-
-	if hr != 0 {
-		return nil, ole.NewError(hr)
-	}
-
-	return out, nil
-}
-
-
 const GUIDiMediaFrameSourceInfo2 string = "195a7855-6457-42c6-a769-19b65bd32e6e"
 const SignatureiMediaFrameSourceInfo2 string = "{195a7855-6457-42c6-a769-19b65bd32e6e}"
 
@@ -211,38 +56,6 @@ type iMediaFrameSourceInfo2Vtbl struct {
 
 func (v *iMediaFrameSourceInfo2) VTable() *iMediaFrameSourceInfo2Vtbl {
 	return (*iMediaFrameSourceInfo2Vtbl)(unsafe.Pointer(v.RawVTable))
-}
-
-func (v *iMediaFrameSourceInfo2) GetProfileId() (string, error) {
-	var outHStr ole.HString
-	hr, _, _ := syscall.SyscallN(
-		v.VTable().GetProfileId,
-		uintptr(unsafe.Pointer(v)),        // this
-		uintptr(unsafe.Pointer(&outHStr)), // out string
-	)
-
-	if hr != 0 {
-		return "", ole.NewError(hr)
-	}
-
-	out := outHStr.String()
-	ole.DeleteHString(outHStr)
-	return out, nil
-}
-
-func (v *iMediaFrameSourceInfo2) GetVideoProfileMediaDescription() (*collections.IVectorView, error) {
-	var out *collections.IVectorView
-	hr, _, _ := syscall.SyscallN(
-		v.VTable().GetVideoProfileMediaDescription,
-		uintptr(unsafe.Pointer(v)),    // this
-		uintptr(unsafe.Pointer(&out)), // out collections.IVectorView
-	)
-
-	if hr != 0 {
-		return nil, ole.NewError(hr)
-	}
-
-	return out, nil
 }
 
 const GUIDiMediaFrameSourceInfo3 string = "ca824ab6-66ea-5885-a2b6-26c0eeec3c7b"

@@ -6,9 +6,11 @@
 package streams
 
 import (
+	"syscall"
 	"unsafe"
 
 	"github.com/go-ole/go-ole"
+	"github.com/saltosystems/winrt-go/windows/foundation"
 )
 
 const GUIDIInputStream string = "905a0fe2-bc53-11df-8c49-001e4fc686da"
@@ -28,20 +30,20 @@ func (v *IInputStream) VTable() *IInputStreamVtbl {
 	return (*IInputStreamVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-//func (v *IInputStream) ReadAsync(buffer *IBuffer, count uint32, options InputStreamOptions) (*foundation.IAsyncOperationWithProgress, error) {
-//	var out *foundation.IAsyncOperationWithProgress
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().ReadAsync,
-//		uintptr(unsafe.Pointer(v)),      // this
-//		uintptr(unsafe.Pointer(buffer)), // in IBuffer
-//		uintptr(count),                  // in uint32
-//		uintptr(options),                // in InputStreamOptions
-//		uintptr(unsafe.Pointer(&out)),   // out foundation.IAsyncOperationWithProgress
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+func (v *IInputStream) ReadAsync(buffer *IBuffer, count uint32, options InputStreamOptions) (*foundation.IAsyncOperationWithProgress, error) {
+	var out *foundation.IAsyncOperationWithProgress
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().ReadAsync,
+		uintptr(unsafe.Pointer(v)),      // this
+		uintptr(unsafe.Pointer(buffer)), // in IBuffer
+		uintptr(count),                  // in uint32
+		uintptr(options),                // in InputStreamOptions
+		uintptr(unsafe.Pointer(&out)),   // out foundation.IAsyncOperationWithProgress
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}

@@ -29,26 +29,26 @@ func (impl *DownloadOperation) GetResultFile() (*storage.IStorageFile, error) {
 	return v.GetResultFile()
 }
 
-//func (impl *DownloadOperation) GetProgress() (BackgroundDownloadProgress, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiDownloadOperation))
-//	defer itf.Release()
-//	v := (*iDownloadOperation)(unsafe.Pointer(itf))
-//	return v.GetProgress()
-//}
-//
-//func (impl *DownloadOperation) StartAsync() (*foundation.IAsyncOperationWithProgress, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiDownloadOperation))
-//	defer itf.Release()
-//	v := (*iDownloadOperation)(unsafe.Pointer(itf))
-//	return v.StartAsync()
-//}
-//
-//func (impl *DownloadOperation) AttachAsync() (*foundation.IAsyncOperationWithProgress, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiDownloadOperation))
-//	defer itf.Release()
-//	v := (*iDownloadOperation)(unsafe.Pointer(itf))
-//	return v.AttachAsync()
-//}
+func (impl *DownloadOperation) GetProgress() (BackgroundDownloadProgress, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiDownloadOperation))
+	defer itf.Release()
+	v := (*iDownloadOperation)(unsafe.Pointer(itf))
+	return v.GetProgress()
+}
+
+func (impl *DownloadOperation) StartAsync() (*foundation.IAsyncOperationWithProgress, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiDownloadOperation))
+	defer itf.Release()
+	v := (*iDownloadOperation)(unsafe.Pointer(itf))
+	return v.StartAsync()
+}
+
+func (impl *DownloadOperation) AttachAsync() (*foundation.IAsyncOperationWithProgress, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiDownloadOperation))
+	defer itf.Release()
+	v := (*iDownloadOperation)(unsafe.Pointer(itf))
+	return v.AttachAsync()
+}
 
 func (impl *DownloadOperation) Pause() error {
 	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiDownloadOperation))
@@ -63,83 +63,83 @@ func (impl *DownloadOperation) Resume() error {
 	v := (*iDownloadOperation)(unsafe.Pointer(itf))
 	return v.Resume()
 }
-//
-//func (impl *DownloadOperation) GetGuid() (syscall.GUID, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperation))
-//	defer itf.Release()
-//	v := (*IBackgroundTransferOperation)(unsafe.Pointer(itf))
-//	return v.GetGuid()
-//}
-//
-//func (impl *DownloadOperation) GetRequestedUri() (*foundation.Uri, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperation))
-//	defer itf.Release()
-//	v := (*IBackgroundTransferOperation)(unsafe.Pointer(itf))
-//	return v.GetRequestedUri()
-//}
-//
-//func (impl *DownloadOperation) GetMethod() (string, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperation))
-//	defer itf.Release()
-//	v := (*IBackgroundTransferOperation)(unsafe.Pointer(itf))
-//	return v.GetMethod()
-//}
-//
-//func (impl *DownloadOperation) GetGroup() (string, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperation))
-//	defer itf.Release()
-//	v := (*IBackgroundTransferOperation)(unsafe.Pointer(itf))
-//	return v.GetGroup()
-//}
-//
-//func (impl *DownloadOperation) GetCostPolicy() (BackgroundTransferCostPolicy, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperation))
-//	defer itf.Release()
-//	v := (*IBackgroundTransferOperation)(unsafe.Pointer(itf))
-//	return v.GetCostPolicy()
-//}
-//
-//func (impl *DownloadOperation) SetCostPolicy(value BackgroundTransferCostPolicy) error {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperation))
-//	defer itf.Release()
-//	v := (*IBackgroundTransferOperation)(unsafe.Pointer(itf))
-//	return v.SetCostPolicy(value)
-//}
-//
-//func (impl *DownloadOperation) GetResultStreamAt(position uint64) (*streams.IInputStream, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperation))
-//	defer itf.Release()
-//	v := (*IBackgroundTransferOperation)(unsafe.Pointer(itf))
-//	return v.GetResultStreamAt(position)
-//}
-//
-//func (impl *DownloadOperation) GetResponseInformation() (*ResponseInformation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperation))
-//	defer itf.Release()
-//	v := (*IBackgroundTransferOperation)(unsafe.Pointer(itf))
-//	return v.GetResponseInformation()
-//}
-//
-//func (impl *DownloadOperation) GetPriority() (BackgroundTransferPriority, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperationPriority))
-//	defer itf.Release()
-//	v := (*IBackgroundTransferOperationPriority)(unsafe.Pointer(itf))
-//	return v.GetPriority()
-//}
-//
-//func (impl *DownloadOperation) SetPriority(value BackgroundTransferPriority) error {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperationPriority))
-//	defer itf.Release()
-//	v := (*IBackgroundTransferOperationPriority)(unsafe.Pointer(itf))
-//	return v.SetPriority(value)
-//}
-//
-//func (impl *DownloadOperation) GetTransferGroup() (*BackgroundTransferGroup, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiDownloadOperation2))
-//	defer itf.Release()
-//	v := (*iDownloadOperation2)(unsafe.Pointer(itf))
-//	return v.GetTransferGroup()
-//}
+
+func (impl *DownloadOperation) GetGuid() (syscall.GUID, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperation))
+	defer itf.Release()
+	v := (*IBackgroundTransferOperation)(unsafe.Pointer(itf))
+	return v.GetGuid()
+}
+
+func (impl *DownloadOperation) GetRequestedUri() (*foundation.Uri, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperation))
+	defer itf.Release()
+	v := (*IBackgroundTransferOperation)(unsafe.Pointer(itf))
+	return v.GetRequestedUri()
+}
+
+func (impl *DownloadOperation) GetMethod() (string, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperation))
+	defer itf.Release()
+	v := (*IBackgroundTransferOperation)(unsafe.Pointer(itf))
+	return v.GetMethod()
+}
+
+func (impl *DownloadOperation) GetGroup() (string, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperation))
+	defer itf.Release()
+	v := (*IBackgroundTransferOperation)(unsafe.Pointer(itf))
+	return v.GetGroup()
+}
+
+func (impl *DownloadOperation) GetCostPolicy() (BackgroundTransferCostPolicy, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperation))
+	defer itf.Release()
+	v := (*IBackgroundTransferOperation)(unsafe.Pointer(itf))
+	return v.GetCostPolicy()
+}
+
+func (impl *DownloadOperation) SetCostPolicy(value BackgroundTransferCostPolicy) error {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperation))
+	defer itf.Release()
+	v := (*IBackgroundTransferOperation)(unsafe.Pointer(itf))
+	return v.SetCostPolicy(value)
+}
+
+func (impl *DownloadOperation) GetResultStreamAt(position uint64) (*streams.IInputStream, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperation))
+	defer itf.Release()
+	v := (*IBackgroundTransferOperation)(unsafe.Pointer(itf))
+	return v.GetResultStreamAt(position)
+}
+
+func (impl *DownloadOperation) GetResponseInformation() (*ResponseInformation, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperation))
+	defer itf.Release()
+	v := (*IBackgroundTransferOperation)(unsafe.Pointer(itf))
+	return v.GetResponseInformation()
+}
+
+func (impl *DownloadOperation) GetPriority() (BackgroundTransferPriority, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperationPriority))
+	defer itf.Release()
+	v := (*IBackgroundTransferOperationPriority)(unsafe.Pointer(itf))
+	return v.GetPriority()
+}
+
+func (impl *DownloadOperation) SetPriority(value BackgroundTransferPriority) error {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIBackgroundTransferOperationPriority))
+	defer itf.Release()
+	v := (*IBackgroundTransferOperationPriority)(unsafe.Pointer(itf))
+	return v.SetPriority(value)
+}
+
+func (impl *DownloadOperation) GetTransferGroup() (*BackgroundTransferGroup, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiDownloadOperation2))
+	defer itf.Release()
+	v := (*iDownloadOperation2)(unsafe.Pointer(itf))
+	return v.GetTransferGroup()
+}
 
 func (impl *DownloadOperation) GetIsRandomAccessRequired() (bool, error) {
 	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiDownloadOperation3))
@@ -262,50 +262,50 @@ func (v *iDownloadOperation) GetResultFile() (*storage.IStorageFile, error) {
 	return out, nil
 }
 
-//func (v *iDownloadOperation) GetProgress() (BackgroundDownloadProgress, error) {
-//	var out BackgroundDownloadProgress
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().GetProgress,
-//		uintptr(unsafe.Pointer(v)),    // this
-//		uintptr(unsafe.Pointer(&out)), // out BackgroundDownloadProgress
-//	)
-//
-//	if hr != 0 {
-//		return BackgroundDownloadProgress{}, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
-//
-//func (v *iDownloadOperation) StartAsync() (*foundation.IAsyncOperationWithProgress, error) {
-//	var out *foundation.IAsyncOperationWithProgress
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().StartAsync,
-//		uintptr(unsafe.Pointer(v)),    // this
-//		uintptr(unsafe.Pointer(&out)), // out foundation.IAsyncOperationWithProgress
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
-//
-//func (v *iDownloadOperation) AttachAsync() (*foundation.IAsyncOperationWithProgress, error) {
-//	var out *foundation.IAsyncOperationWithProgress
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().AttachAsync,
-//		uintptr(unsafe.Pointer(v)),    // this
-//		uintptr(unsafe.Pointer(&out)), // out foundation.IAsyncOperationWithProgress
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+func (v *iDownloadOperation) GetProgress() (BackgroundDownloadProgress, error) {
+	var out BackgroundDownloadProgress
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().GetProgress,
+		uintptr(unsafe.Pointer(v)),    // this
+		uintptr(unsafe.Pointer(&out)), // out BackgroundDownloadProgress
+	)
+
+	if hr != 0 {
+		return BackgroundDownloadProgress{}, ole.NewError(hr)
+	}
+
+	return out, nil
+}
+
+func (v *iDownloadOperation) StartAsync() (*foundation.IAsyncOperationWithProgress, error) {
+	var out *foundation.IAsyncOperationWithProgress
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().StartAsync,
+		uintptr(unsafe.Pointer(v)),    // this
+		uintptr(unsafe.Pointer(&out)), // out foundation.IAsyncOperationWithProgress
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
+
+func (v *iDownloadOperation) AttachAsync() (*foundation.IAsyncOperationWithProgress, error) {
+	var out *foundation.IAsyncOperationWithProgress
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().AttachAsync,
+		uintptr(unsafe.Pointer(v)),    // this
+		uintptr(unsafe.Pointer(&out)), // out foundation.IAsyncOperationWithProgress
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
 
 func (v *iDownloadOperation) Pause() error {
 	hr, _, _ := syscall.SyscallN(
@@ -350,20 +350,20 @@ func (v *iDownloadOperation2) VTable() *iDownloadOperation2Vtbl {
 	return (*iDownloadOperation2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-//func (v *iDownloadOperation2) GetTransferGroup() (*BackgroundTransferGroup, error) {
-//	var out *BackgroundTransferGroup
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().GetTransferGroup,
-//		uintptr(unsafe.Pointer(v)),    // this
-//		uintptr(unsafe.Pointer(&out)), // out BackgroundTransferGroup
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+func (v *iDownloadOperation2) GetTransferGroup() (*BackgroundTransferGroup, error) {
+	var out *BackgroundTransferGroup
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().GetTransferGroup,
+		uintptr(unsafe.Pointer(v)),    // this
+		uintptr(unsafe.Pointer(&out)), // out BackgroundTransferGroup
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
 
 const GUIDiDownloadOperation3 string = "5027351c-7d5e-4adc-b8d3-df5c6031b9cc"
 const SignatureiDownloadOperation3 string = "{5027351c-7d5e-4adc-b8d3-df5c6031b9cc}"

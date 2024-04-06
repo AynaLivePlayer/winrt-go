@@ -82,6 +82,13 @@ func (impl *AudioEncodingProperties) GetBitsPerSample() (uint32, error) {
 	return v.GetBitsPerSample()
 }
 
+func (impl *AudioEncodingProperties) GetProperties() (*MediaPropertySet, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIMediaEncodingProperties))
+	defer itf.Release()
+	v := (*IMediaEncodingProperties)(unsafe.Pointer(itf))
+	return v.GetProperties()
+}
+
 func (impl *AudioEncodingProperties) GetType() (string, error) {
 	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIMediaEncodingProperties))
 	defer itf.Release()

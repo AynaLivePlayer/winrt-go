@@ -75,21 +75,21 @@ func (v *IStorageFile) GetContentType() (string, error) {
 	return out, nil
 }
 
-//func (v *IStorageFile) OpenAsync(accessMode FileAccessMode) (*foundation.IAsyncOperation, error) {
-//	var out *foundation.IAsyncOperation
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().OpenAsync,
-//		uintptr(unsafe.Pointer(v)),    // this
-//		uintptr(accessMode),           // in FileAccessMode
-//		uintptr(unsafe.Pointer(&out)), // out foundation.IAsyncOperation
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+func (v *IStorageFile) OpenAsync(accessMode FileAccessMode) (*foundation.IAsyncOperation, error) {
+	var out *foundation.IAsyncOperation
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().OpenAsync,
+		uintptr(unsafe.Pointer(v)),    // this
+		uintptr(accessMode),           // in FileAccessMode
+		uintptr(unsafe.Pointer(&out)), // out foundation.IAsyncOperation
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
 
 func (v *IStorageFile) OpenTransactedWriteAsync() (*foundation.IAsyncOperation, error) {
 	var out *foundation.IAsyncOperation
@@ -106,64 +106,64 @@ func (v *IStorageFile) OpenTransactedWriteAsync() (*foundation.IAsyncOperation, 
 	return out, nil
 }
 
-//func (v *IStorageFile) CopyOverloadDefaultNameAndOptions(destinationFolder *IStorageFolder) (*foundation.IAsyncOperation, error) {
-//	var out *foundation.IAsyncOperation
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().CopyOverloadDefaultNameAndOptions,
-//		uintptr(unsafe.Pointer(v)),                 // this
-//		uintptr(unsafe.Pointer(destinationFolder)), // in IStorageFolder
-//		uintptr(unsafe.Pointer(&out)),              // out foundation.IAsyncOperation
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+func (v *IStorageFile) CopyOverloadDefaultNameAndOptions(destinationFolder *IStorageFolder) (*foundation.IAsyncOperation, error) {
+	var out *foundation.IAsyncOperation
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().CopyOverloadDefaultNameAndOptions,
+		uintptr(unsafe.Pointer(v)),                 // this
+		uintptr(unsafe.Pointer(destinationFolder)), // in IStorageFolder
+		uintptr(unsafe.Pointer(&out)),              // out foundation.IAsyncOperation
+	)
 
-//func (v *IStorageFile) CopyOverloadDefaultOptions(destinationFolder *IStorageFolder, desiredNewName string) (*foundation.IAsyncOperation, error) {
-//	var out *foundation.IAsyncOperation
-//	desiredNewNameHStr, err := ole.NewHString(desiredNewName)
-//	if err != nil {
-//		return nil, err
-//	}
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().CopyOverloadDefaultOptions,
-//		uintptr(unsafe.Pointer(v)),                 // this
-//		uintptr(unsafe.Pointer(destinationFolder)), // in IStorageFolder
-//		uintptr(desiredNewNameHStr),                // in string
-//		uintptr(unsafe.Pointer(&out)),              // out foundation.IAsyncOperation
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
-//
-//func (v *IStorageFile) CopyOverload(destinationFolder *IStorageFolder, desiredNewName string, option NameCollisionOption) (*foundation.IAsyncOperation, error) {
-//	var out *foundation.IAsyncOperation
-//	desiredNewNameHStr, err := ole.NewHString(desiredNewName)
-//	if err != nil {
-//		return nil, err
-//	}
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().CopyOverload,
-//		uintptr(unsafe.Pointer(v)),                 // this
-//		uintptr(unsafe.Pointer(destinationFolder)), // in IStorageFolder
-//		uintptr(desiredNewNameHStr),                // in string
-//		uintptr(option),                            // in NameCollisionOption
-//		uintptr(unsafe.Pointer(&out)),              // out foundation.IAsyncOperation
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
+
+func (v *IStorageFile) CopyOverloadDefaultOptions(destinationFolder *IStorageFolder, desiredNewName string) (*foundation.IAsyncOperation, error) {
+	var out *foundation.IAsyncOperation
+	desiredNewNameHStr, err := ole.NewHString(desiredNewName)
+	if err != nil {
+		return nil, err
+	}
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().CopyOverloadDefaultOptions,
+		uintptr(unsafe.Pointer(v)),                 // this
+		uintptr(unsafe.Pointer(destinationFolder)), // in IStorageFolder
+		uintptr(desiredNewNameHStr),                // in string
+		uintptr(unsafe.Pointer(&out)),              // out foundation.IAsyncOperation
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
+
+func (v *IStorageFile) CopyOverload(destinationFolder *IStorageFolder, desiredNewName string, option NameCollisionOption) (*foundation.IAsyncOperation, error) {
+	var out *foundation.IAsyncOperation
+	desiredNewNameHStr, err := ole.NewHString(desiredNewName)
+	if err != nil {
+		return nil, err
+	}
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().CopyOverload,
+		uintptr(unsafe.Pointer(v)),                 // this
+		uintptr(unsafe.Pointer(destinationFolder)), // in IStorageFolder
+		uintptr(desiredNewNameHStr),                // in string
+		uintptr(option),                            // in NameCollisionOption
+		uintptr(unsafe.Pointer(&out)),              // out foundation.IAsyncOperation
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
 
 func (v *IStorageFile) CopyAndReplaceAsync(fileToReplace *IStorageFile) (*foundation.IAsyncAction, error) {
 	var out *foundation.IAsyncAction
@@ -181,64 +181,64 @@ func (v *IStorageFile) CopyAndReplaceAsync(fileToReplace *IStorageFile) (*founda
 	return out, nil
 }
 
-//func (v *IStorageFile) MoveOverloadDefaultNameAndOptions(destinationFolder *IStorageFolder) (*foundation.IAsyncAction, error) {
-//	var out *foundation.IAsyncAction
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().MoveOverloadDefaultNameAndOptions,
-//		uintptr(unsafe.Pointer(v)),                 // this
-//		uintptr(unsafe.Pointer(destinationFolder)), // in IStorageFolder
-//		uintptr(unsafe.Pointer(&out)),              // out foundation.IAsyncAction
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
-//
-//func (v *IStorageFile) MoveOverloadDefaultOptions(destinationFolder *IStorageFolder, desiredNewName string) (*foundation.IAsyncAction, error) {
-//	var out *foundation.IAsyncAction
-//	desiredNewNameHStr, err := ole.NewHString(desiredNewName)
-//	if err != nil {
-//		return nil, err
-//	}
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().MoveOverloadDefaultOptions,
-//		uintptr(unsafe.Pointer(v)),                 // this
-//		uintptr(unsafe.Pointer(destinationFolder)), // in IStorageFolder
-//		uintptr(desiredNewNameHStr),                // in string
-//		uintptr(unsafe.Pointer(&out)),              // out foundation.IAsyncAction
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
-//
-//func (v *IStorageFile) MoveOverload(destinationFolder *IStorageFolder, desiredNewName string, option NameCollisionOption) (*foundation.IAsyncAction, error) {
-//	var out *foundation.IAsyncAction
-//	desiredNewNameHStr, err := ole.NewHString(desiredNewName)
-//	if err != nil {
-//		return nil, err
-//	}
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().MoveOverload,
-//		uintptr(unsafe.Pointer(v)),                 // this
-//		uintptr(unsafe.Pointer(destinationFolder)), // in IStorageFolder
-//		uintptr(desiredNewNameHStr),                // in string
-//		uintptr(option),                            // in NameCollisionOption
-//		uintptr(unsafe.Pointer(&out)),              // out foundation.IAsyncAction
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+func (v *IStorageFile) MoveOverloadDefaultNameAndOptions(destinationFolder *IStorageFolder) (*foundation.IAsyncAction, error) {
+	var out *foundation.IAsyncAction
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().MoveOverloadDefaultNameAndOptions,
+		uintptr(unsafe.Pointer(v)),                 // this
+		uintptr(unsafe.Pointer(destinationFolder)), // in IStorageFolder
+		uintptr(unsafe.Pointer(&out)),              // out foundation.IAsyncAction
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
+
+func (v *IStorageFile) MoveOverloadDefaultOptions(destinationFolder *IStorageFolder, desiredNewName string) (*foundation.IAsyncAction, error) {
+	var out *foundation.IAsyncAction
+	desiredNewNameHStr, err := ole.NewHString(desiredNewName)
+	if err != nil {
+		return nil, err
+	}
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().MoveOverloadDefaultOptions,
+		uintptr(unsafe.Pointer(v)),                 // this
+		uintptr(unsafe.Pointer(destinationFolder)), // in IStorageFolder
+		uintptr(desiredNewNameHStr),                // in string
+		uintptr(unsafe.Pointer(&out)),              // out foundation.IAsyncAction
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
+
+func (v *IStorageFile) MoveOverload(destinationFolder *IStorageFolder, desiredNewName string, option NameCollisionOption) (*foundation.IAsyncAction, error) {
+	var out *foundation.IAsyncAction
+	desiredNewNameHStr, err := ole.NewHString(desiredNewName)
+	if err != nil {
+		return nil, err
+	}
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().MoveOverload,
+		uintptr(unsafe.Pointer(v)),                 // this
+		uintptr(unsafe.Pointer(destinationFolder)), // in IStorageFolder
+		uintptr(desiredNewNameHStr),                // in string
+		uintptr(option),                            // in NameCollisionOption
+		uintptr(unsafe.Pointer(&out)),              // out foundation.IAsyncAction
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
 
 func (v *IStorageFile) MoveAndReplaceAsync(fileToReplace *IStorageFile) (*foundation.IAsyncAction, error) {
 	var out *foundation.IAsyncAction

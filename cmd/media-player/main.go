@@ -1,16 +1,17 @@
 package main
 
 import (
+	"time"
+	"unsafe"
+
 	"github.com/go-ole/go-ole"
 	"github.com/saltosystems/winrt-go/windows/foundation"
 	"github.com/saltosystems/winrt-go/windows/media/core"
 	"github.com/saltosystems/winrt-go/windows/media/playback"
-	"time"
-	"unsafe"
 )
 
 func main() {
-	ole.CoInitialize(0)
+	_ = ole.CoInitialize(0)
 	p, err := playback.NewMediaPlayer()
 	if err != nil {
 		panic(err)

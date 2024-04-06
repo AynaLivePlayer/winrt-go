@@ -82,21 +82,21 @@ func (v *IRandomAccessStream) GetInputStreamAt(position uint64) (*IInputStream, 
 	return out, nil
 }
 
-//func (v *IRandomAccessStream) GetOutputStreamAt(position uint64) (*IOutputStream, error) {
-//	var out *IOutputStream
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().GetOutputStreamAt,
-//		uintptr(unsafe.Pointer(v)),    // this
-//		uintptr(position),             // in uint64
-//		uintptr(unsafe.Pointer(&out)), // out IOutputStream
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+func (v *IRandomAccessStream) GetOutputStreamAt(position uint64) (*IOutputStream, error) {
+	var out *IOutputStream
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().GetOutputStreamAt,
+		uintptr(unsafe.Pointer(v)),    // this
+		uintptr(position),             // in uint64
+		uintptr(unsafe.Pointer(&out)), // out IOutputStream
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
 
 func (v *IRandomAccessStream) GetPosition() (uint64, error) {
 	var out uint64

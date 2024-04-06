@@ -160,33 +160,33 @@ func (impl *VideoProperties) GetDirectors() (*collections.IVector, error) {
 	return v.GetDirectors()
 }
 
-//func (impl *VideoProperties) GetOrientation() (VideoOrientation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiVideoProperties))
-//	defer itf.Release()
-//	v := (*iVideoProperties)(unsafe.Pointer(itf))
-//	return v.GetOrientation()
-//}
-//
-//func (impl *VideoProperties) RetrievePropertiesAsync(propertiesToRetrieve *collections.IIterable) (*foundation.IAsyncOperation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemExtraProperties))
-//	defer itf.Release()
-//	v := (*IStorageItemExtraProperties)(unsafe.Pointer(itf))
-//	return v.RetrievePropertiesAsync(propertiesToRetrieve)
-//}
-//
-//func (impl *VideoProperties) SavePropertiesAsync(propertiesToSave *collections.IIterable) (*foundation.IAsyncAction, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemExtraProperties))
-//	defer itf.Release()
-//	v := (*IStorageItemExtraProperties)(unsafe.Pointer(itf))
-//	return v.SavePropertiesAsync(propertiesToSave)
-//}
-//
-//func (impl *VideoProperties) SavePropertiesAsyncOverloadDefault() (*foundation.IAsyncAction, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemExtraProperties))
-//	defer itf.Release()
-//	v := (*IStorageItemExtraProperties)(unsafe.Pointer(itf))
-//	return v.SavePropertiesAsyncOverloadDefault()
-//}
+func (impl *VideoProperties) GetOrientation() (VideoOrientation, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiVideoProperties))
+	defer itf.Release()
+	v := (*iVideoProperties)(unsafe.Pointer(itf))
+	return v.GetOrientation()
+}
+
+func (impl *VideoProperties) RetrievePropertiesAsync(propertiesToRetrieve *collections.IIterable) (*foundation.IAsyncOperation, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemExtraProperties))
+	defer itf.Release()
+	v := (*IStorageItemExtraProperties)(unsafe.Pointer(itf))
+	return v.RetrievePropertiesAsync(propertiesToRetrieve)
+}
+
+func (impl *VideoProperties) SavePropertiesAsync(propertiesToSave *collections.IIterable) (*foundation.IAsyncAction, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemExtraProperties))
+	defer itf.Release()
+	v := (*IStorageItemExtraProperties)(unsafe.Pointer(itf))
+	return v.SavePropertiesAsync(propertiesToSave)
+}
+
+func (impl *VideoProperties) SavePropertiesAsyncOverloadDefault() (*foundation.IAsyncAction, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemExtraProperties))
+	defer itf.Release()
+	v := (*IStorageItemExtraProperties)(unsafe.Pointer(itf))
+	return v.SavePropertiesAsyncOverloadDefault()
+}
 
 const GUIDiVideoProperties string = "719ae507-68de-4db8-97de-49998c059f2f"
 const SignatureiVideoProperties string = "{719ae507-68de-4db8-97de-49998c059f2f}"
@@ -538,17 +538,17 @@ func (v *iVideoProperties) GetDirectors() (*collections.IVector, error) {
 	return out, nil
 }
 
-//func (v *iVideoProperties) GetOrientation() (VideoOrientation, error) {
-//	var out VideoOrientation
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().GetOrientation,
-//		uintptr(unsafe.Pointer(v)),    // this
-//		uintptr(unsafe.Pointer(&out)), // out VideoOrientation
-//	)
-//
-//	if hr != 0 {
-//		return VideoOrientationNormal, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+func (v *iVideoProperties) GetOrientation() (VideoOrientation, error) {
+	var out VideoOrientation
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().GetOrientation,
+		uintptr(unsafe.Pointer(v)),    // this
+		uintptr(unsafe.Pointer(&out)), // out VideoOrientation
+	)
+
+	if hr != 0 {
+		return VideoOrientationNormal, ole.NewError(hr)
+	}
+
+	return out, nil
+}

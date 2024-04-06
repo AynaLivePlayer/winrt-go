@@ -34,12 +34,12 @@ func (impl *MediaFrameSourceController) SetPropertyAsync(propertyId string, prop
 	return v.SetPropertyAsync(propertyId, propertyValue)
 }
 
-//func (impl *MediaFrameSourceController) GetVideoDeviceController() (*devices.VideoDeviceController, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiMediaFrameSourceController))
-//	defer itf.Release()
-//	v := (*iMediaFrameSourceController)(unsafe.Pointer(itf))
-//	return v.GetVideoDeviceController()
-//}
+func (impl *MediaFrameSourceController) GetVideoDeviceController() (*devices.VideoDeviceController, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiMediaFrameSourceController))
+	defer itf.Release()
+	v := (*iMediaFrameSourceController)(unsafe.Pointer(itf))
+	return v.GetVideoDeviceController()
+}
 
 func (impl *MediaFrameSourceController) GetPropertyByExtendedIdAsync(extendedPropertyIdSize uint32, extendedPropertyId []uint8, maxPropertyValueSize *foundation.IReference) (*foundation.IAsyncOperation, error) {
 	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiMediaFrameSourceController2))
@@ -122,20 +122,20 @@ func (v *iMediaFrameSourceController) SetPropertyAsync(propertyId string, proper
 	return out, nil
 }
 
-//func (v *iMediaFrameSourceController) GetVideoDeviceController() (*devices.VideoDeviceController, error) {
-//	var out *devices.VideoDeviceController
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().GetVideoDeviceController,
-//		uintptr(unsafe.Pointer(v)),    // this
-//		uintptr(unsafe.Pointer(&out)), // out devices.VideoDeviceController
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+func (v *iMediaFrameSourceController) GetVideoDeviceController() (*devices.VideoDeviceController, error) {
+	var out *devices.VideoDeviceController
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().GetVideoDeviceController,
+		uintptr(unsafe.Pointer(v)),    // this
+		uintptr(unsafe.Pointer(&out)), // out devices.VideoDeviceController
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
 
 const GUIDiMediaFrameSourceController2 string = "efc49fd4-fcf2-4a03-b4e4-ac9628739bee"
 const SignatureiMediaFrameSourceController2 string = "{efc49fd4-fcf2-4a03-b4e4-ac9628739bee}"

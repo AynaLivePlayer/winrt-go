@@ -13,7 +13,7 @@ import (
 	"github.com/saltosystems/winrt-go/windows/foundation"
 	"github.com/saltosystems/winrt-go/windows/foundation/collections"
 	"github.com/saltosystems/winrt-go/windows/storage/streams"
-	//"github.com/saltosystems/winrt-go/windows/web/http"
+	"github.com/saltosystems/winrt-go/windows/web/http"
 )
 
 const SignatureAdaptiveMediaSource string = "rc(Windows.Media.Streaming.Adaptive.AdaptiveMediaSource;{4c7332ef-d39f-4396-b4d9-043957a7c964})"
@@ -204,12 +204,12 @@ func (impl *AdaptiveMediaSource) RemoveDownloadFailed(token foundation.EventRegi
 	return v.RemoveDownloadFailed(token)
 }
 
-//func (impl *AdaptiveMediaSource) GetAdvancedSettings() (*AdaptiveMediaSourceAdvancedSettings, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiAdaptiveMediaSource2))
-//	defer itf.Release()
-//	v := (*iAdaptiveMediaSource2)(unsafe.Pointer(itf))
-//	return v.GetAdvancedSettings()
-//}
+func (impl *AdaptiveMediaSource) GetAdvancedSettings() (*AdaptiveMediaSourceAdvancedSettings, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiAdaptiveMediaSource2))
+	defer itf.Release()
+	v := (*iAdaptiveMediaSource2)(unsafe.Pointer(itf))
+	return v.GetAdvancedSettings()
+}
 
 func (impl *AdaptiveMediaSource) GetMinLiveOffset() (*foundation.IReference, error) {
 	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiAdaptiveMediaSource3))
@@ -239,19 +239,19 @@ func (impl *AdaptiveMediaSource) SetDesiredSeekableWindowSize(value *foundation.
 	return v.SetDesiredSeekableWindowSize(value)
 }
 
-//func (impl *AdaptiveMediaSource) GetDiagnostics() (*AdaptiveMediaSourceDiagnostics, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiAdaptiveMediaSource3))
-//	defer itf.Release()
-//	v := (*iAdaptiveMediaSource3)(unsafe.Pointer(itf))
-//	return v.GetDiagnostics()
-//}
-//
-//func (impl *AdaptiveMediaSource) GetCorrelatedTimes() (*AdaptiveMediaSourceCorrelatedTimes, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiAdaptiveMediaSource3))
-//	defer itf.Release()
-//	v := (*iAdaptiveMediaSource3)(unsafe.Pointer(itf))
-//	return v.GetCorrelatedTimes()
-//}
+func (impl *AdaptiveMediaSource) GetDiagnostics() (*AdaptiveMediaSourceDiagnostics, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiAdaptiveMediaSource3))
+	defer itf.Release()
+	v := (*iAdaptiveMediaSource3)(unsafe.Pointer(itf))
+	return v.GetDiagnostics()
+}
+
+func (impl *AdaptiveMediaSource) GetCorrelatedTimes() (*AdaptiveMediaSourceCorrelatedTimes, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDiAdaptiveMediaSource3))
+	defer itf.Release()
+	v := (*iAdaptiveMediaSource3)(unsafe.Pointer(itf))
+	return v.GetCorrelatedTimes()
+}
 
 func (impl *AdaptiveMediaSource) Close() error {
 	itf := impl.MustQueryInterface(ole.NewGUID(foundation.GUIDIClosable))
@@ -704,20 +704,20 @@ func (v *iAdaptiveMediaSource2) VTable() *iAdaptiveMediaSource2Vtbl {
 	return (*iAdaptiveMediaSource2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-//func (v *iAdaptiveMediaSource2) GetAdvancedSettings() (*AdaptiveMediaSourceAdvancedSettings, error) {
-//	var out *AdaptiveMediaSourceAdvancedSettings
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().GetAdvancedSettings,
-//		uintptr(unsafe.Pointer(v)),    // this
-//		uintptr(unsafe.Pointer(&out)), // out AdaptiveMediaSourceAdvancedSettings
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+func (v *iAdaptiveMediaSource2) GetAdvancedSettings() (*AdaptiveMediaSourceAdvancedSettings, error) {
+	var out *AdaptiveMediaSourceAdvancedSettings
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().GetAdvancedSettings,
+		uintptr(unsafe.Pointer(v)),    // this
+		uintptr(unsafe.Pointer(&out)), // out AdaptiveMediaSourceAdvancedSettings
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
 
 const GUIDiAdaptiveMediaSource3 string = "ba7023fd-c334-461b-a36e-c99f54f7174a"
 const SignatureiAdaptiveMediaSource3 string = "{ba7023fd-c334-461b-a36e-c99f54f7174a}"
@@ -800,35 +800,35 @@ func (v *iAdaptiveMediaSource3) SetDesiredSeekableWindowSize(value *foundation.I
 	return nil
 }
 
-//func (v *iAdaptiveMediaSource3) GetDiagnostics() (*AdaptiveMediaSourceDiagnostics, error) {
-//	var out *AdaptiveMediaSourceDiagnostics
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().GetDiagnostics,
-//		uintptr(unsafe.Pointer(v)),    // this
-//		uintptr(unsafe.Pointer(&out)), // out AdaptiveMediaSourceDiagnostics
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
-//
-//func (v *iAdaptiveMediaSource3) GetCorrelatedTimes() (*AdaptiveMediaSourceCorrelatedTimes, error) {
-//	var out *AdaptiveMediaSourceCorrelatedTimes
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().GetCorrelatedTimes,
-//		uintptr(unsafe.Pointer(v)),    // this
-//		uintptr(unsafe.Pointer(&out)), // out AdaptiveMediaSourceCorrelatedTimes
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+func (v *iAdaptiveMediaSource3) GetDiagnostics() (*AdaptiveMediaSourceDiagnostics, error) {
+	var out *AdaptiveMediaSourceDiagnostics
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().GetDiagnostics,
+		uintptr(unsafe.Pointer(v)),    // this
+		uintptr(unsafe.Pointer(&out)), // out AdaptiveMediaSourceDiagnostics
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
+
+func (v *iAdaptiveMediaSource3) GetCorrelatedTimes() (*AdaptiveMediaSourceCorrelatedTimes, error) {
+	var out *AdaptiveMediaSourceCorrelatedTimes
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().GetCorrelatedTimes,
+		uintptr(unsafe.Pointer(v)),    // this
+		uintptr(unsafe.Pointer(&out)), // out AdaptiveMediaSourceCorrelatedTimes
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
 
 const GUIDiAdaptiveMediaSourceStatics string = "50a6bd5d-66ef-4cd3-9579-9e660507dc3f"
 const SignatureiAdaptiveMediaSourceStatics string = "{50a6bd5d-66ef-4cd3-9579-9e660507dc3f}"
@@ -899,28 +899,28 @@ func AdaptiveMediaSourceCreateFromUriAsync(uri *foundation.Uri) (*foundation.IAs
 	return out, nil
 }
 
-//func AdaptiveMediaSourceCreateFromUriWithDownloaderAsync(uri *foundation.Uri, httpClient *http.HttpClient) (*foundation.IAsyncOperation, error) {
-//	inspectable, err := ole.RoGetActivationFactory("Windows.Media.Streaming.Adaptive.AdaptiveMediaSource", ole.NewGUID(GUIDiAdaptiveMediaSourceStatics))
-//	if err != nil {
-//		return nil, err
-//	}
-//	v := (*iAdaptiveMediaSourceStatics)(unsafe.Pointer(inspectable))
-//
-//	var out *foundation.IAsyncOperation
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().AdaptiveMediaSourceCreateFromUriWithDownloaderAsync,
-//		0,                                   // this is a static func, so there's no this
-//		uintptr(unsafe.Pointer(uri)),        // in foundation.Uri
-//		uintptr(unsafe.Pointer(httpClient)), // in http.HttpClient
-//		uintptr(unsafe.Pointer(&out)),       // out foundation.IAsyncOperation
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+func AdaptiveMediaSourceCreateFromUriWithDownloaderAsync(uri *foundation.Uri, httpClient *http.HttpClient) (*foundation.IAsyncOperation, error) {
+	inspectable, err := ole.RoGetActivationFactory("Windows.Media.Streaming.Adaptive.AdaptiveMediaSource", ole.NewGUID(GUIDiAdaptiveMediaSourceStatics))
+	if err != nil {
+		return nil, err
+	}
+	v := (*iAdaptiveMediaSourceStatics)(unsafe.Pointer(inspectable))
+
+	var out *foundation.IAsyncOperation
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().AdaptiveMediaSourceCreateFromUriWithDownloaderAsync,
+		0,                                   // this is a static func, so there's no this
+		uintptr(unsafe.Pointer(uri)),        // in foundation.Uri
+		uintptr(unsafe.Pointer(httpClient)), // in http.HttpClient
+		uintptr(unsafe.Pointer(&out)),       // out foundation.IAsyncOperation
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
 
 func AdaptiveMediaSourceCreateFromStreamAsync(stream *streams.IInputStream, uri *foundation.Uri, contentType string) (*foundation.IAsyncOperation, error) {
 	inspectable, err := ole.RoGetActivationFactory("Windows.Media.Streaming.Adaptive.AdaptiveMediaSource", ole.NewGUID(GUIDiAdaptiveMediaSourceStatics))
@@ -950,31 +950,31 @@ func AdaptiveMediaSourceCreateFromStreamAsync(stream *streams.IInputStream, uri 
 	return out, nil
 }
 
-//func AdaptiveMediaSourceCreateFromStreamWithDownloaderAsync(stream *streams.IInputStream, uri *foundation.Uri, contentType string, httpClient *http.HttpClient) (*foundation.IAsyncOperation, error) {
-//	inspectable, err := ole.RoGetActivationFactory("Windows.Media.Streaming.Adaptive.AdaptiveMediaSource", ole.NewGUID(GUIDiAdaptiveMediaSourceStatics))
-//	if err != nil {
-//		return nil, err
-//	}
-//	v := (*iAdaptiveMediaSourceStatics)(unsafe.Pointer(inspectable))
-//
-//	var out *foundation.IAsyncOperation
-//	contentTypeHStr, err := ole.NewHString(contentType)
-//	if err != nil {
-//		return nil, err
-//	}
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().AdaptiveMediaSourceCreateFromStreamWithDownloaderAsync,
-//		0,                                   // this is a static func, so there's no this
-//		uintptr(unsafe.Pointer(stream)),     // in streams.IInputStream
-//		uintptr(unsafe.Pointer(uri)),        // in foundation.Uri
-//		uintptr(contentTypeHStr),            // in string
-//		uintptr(unsafe.Pointer(httpClient)), // in http.HttpClient
-//		uintptr(unsafe.Pointer(&out)),       // out foundation.IAsyncOperation
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+func AdaptiveMediaSourceCreateFromStreamWithDownloaderAsync(stream *streams.IInputStream, uri *foundation.Uri, contentType string, httpClient *http.HttpClient) (*foundation.IAsyncOperation, error) {
+	inspectable, err := ole.RoGetActivationFactory("Windows.Media.Streaming.Adaptive.AdaptiveMediaSource", ole.NewGUID(GUIDiAdaptiveMediaSourceStatics))
+	if err != nil {
+		return nil, err
+	}
+	v := (*iAdaptiveMediaSourceStatics)(unsafe.Pointer(inspectable))
+
+	var out *foundation.IAsyncOperation
+	contentTypeHStr, err := ole.NewHString(contentType)
+	if err != nil {
+		return nil, err
+	}
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().AdaptiveMediaSourceCreateFromStreamWithDownloaderAsync,
+		0,                                   // this is a static func, so there's no this
+		uintptr(unsafe.Pointer(stream)),     // in streams.IInputStream
+		uintptr(unsafe.Pointer(uri)),        // in foundation.Uri
+		uintptr(contentTypeHStr),            // in string
+		uintptr(unsafe.Pointer(httpClient)), // in http.HttpClient
+		uintptr(unsafe.Pointer(&out)),       // out foundation.IAsyncOperation
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}

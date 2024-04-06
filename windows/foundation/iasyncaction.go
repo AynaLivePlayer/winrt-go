@@ -31,34 +31,34 @@ func (v *IAsyncAction) VTable() *IAsyncActionVtbl {
 	return (*IAsyncActionVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-//func (v *IAsyncAction) SetCompleted(handler *AsyncActionCompletedHandler) error {
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().SetCompleted,
-//		uintptr(unsafe.Pointer(v)),       // this
-//		uintptr(unsafe.Pointer(handler)), // in AsyncActionCompletedHandler
-//	)
-//
-//	if hr != 0 {
-//		return ole.NewError(hr)
-//	}
-//
-//	return nil
-//}
+func (v *IAsyncAction) SetCompleted(handler *AsyncActionCompletedHandler) error {
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().SetCompleted,
+		uintptr(unsafe.Pointer(v)),       // this
+		uintptr(unsafe.Pointer(handler)), // in AsyncActionCompletedHandler
+	)
 
-//func (v *IAsyncAction) GetCompleted() (*AsyncActionCompletedHandler, error) {
-//	var out *AsyncActionCompletedHandler
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().GetCompleted,
-//		uintptr(unsafe.Pointer(v)),    // this
-//		uintptr(unsafe.Pointer(&out)), // out AsyncActionCompletedHandler
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+	if hr != 0 {
+		return ole.NewError(hr)
+	}
+
+	return nil
+}
+
+func (v *IAsyncAction) GetCompleted() (*AsyncActionCompletedHandler, error) {
+	var out *AsyncActionCompletedHandler
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().GetCompleted,
+		uintptr(unsafe.Pointer(v)),    // this
+		uintptr(unsafe.Pointer(&out)), // out AsyncActionCompletedHandler
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
 
 func (v *IAsyncAction) GetResults() error {
 	hr, _, _ := syscall.SyscallN(

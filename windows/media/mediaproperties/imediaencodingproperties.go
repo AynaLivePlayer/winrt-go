@@ -32,20 +32,20 @@ func (v *IMediaEncodingProperties) VTable() *IMediaEncodingPropertiesVtbl {
 	return (*IMediaEncodingPropertiesVtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-//func (v *IMediaEncodingProperties) GetProperties() (*MediaPropertySet, error) {
-//	var out *MediaPropertySet
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().GetProperties,
-//		uintptr(unsafe.Pointer(v)),    // this
-//		uintptr(unsafe.Pointer(&out)), // out MediaPropertySet
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+func (v *IMediaEncodingProperties) GetProperties() (*MediaPropertySet, error) {
+	var out *MediaPropertySet
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().GetProperties,
+		uintptr(unsafe.Pointer(v)),    // this
+		uintptr(unsafe.Pointer(&out)), // out MediaPropertySet
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
 
 func (v *IMediaEncodingProperties) GetType() (string, error) {
 	var outHStr ole.HString

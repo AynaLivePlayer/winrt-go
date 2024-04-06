@@ -11,6 +11,9 @@ import (
 
 	"github.com/go-ole/go-ole"
 	"github.com/saltosystems/winrt-go/windows/foundation"
+	"github.com/saltosystems/winrt-go/windows/storage/fileproperties"
+	"github.com/saltosystems/winrt-go/windows/storage/streams"
+	"github.com/saltosystems/winrt-go/windows/system"
 )
 
 const SignatureStorageFile string = "rc(Windows.Storage.StorageFile;{fa3f6186-4214-428c-a64c-14c9ac7315ea})"
@@ -33,12 +36,12 @@ func (impl *StorageFile) GetContentType() (string, error) {
 	return v.GetContentType()
 }
 
-//func (impl *StorageFile) OpenAsync(accessMode FileAccessMode) (*foundation.IAsyncOperation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
-//	defer itf.Release()
-//	v := (*IStorageFile)(unsafe.Pointer(itf))
-//	return v.OpenAsync(accessMode)
-//}
+func (impl *StorageFile) OpenAsync(accessMode FileAccessMode) (*foundation.IAsyncOperation, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
+	defer itf.Release()
+	v := (*IStorageFile)(unsafe.Pointer(itf))
+	return v.OpenAsync(accessMode)
+}
 
 func (impl *StorageFile) OpenTransactedWriteAsync() (*foundation.IAsyncOperation, error) {
 	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
@@ -47,257 +50,236 @@ func (impl *StorageFile) OpenTransactedWriteAsync() (*foundation.IAsyncOperation
 	return v.OpenTransactedWriteAsync()
 }
 
-//func (impl *StorageFile) CopyOverloadDefaultNameAndOptions(destinationFolder *IStorageFolder) (*foundation.IAsyncOperation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
-//	defer itf.Release()
-//	v := (*IStorageFile)(unsafe.Pointer(itf))
-//	return v.CopyOverloadDefaultNameAndOptions(destinationFolder)
-//}
-//
-//func (impl *StorageFile) CopyOverloadDefaultOptions(destinationFolder *IStorageFolder, desiredNewName string) (*foundation.IAsyncOperation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
-//	defer itf.Release()
-//	v := (*IStorageFile)(unsafe.Pointer(itf))
-//	return v.CopyOverloadDefaultOptions(destinationFolder, desiredNewName)
-//}
-//
-//func (impl *StorageFile) CopyOverload(destinationFolder *IStorageFolder, desiredNewName string, option NameCollisionOption) (*foundation.IAsyncOperation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
-//	defer itf.Release()
-//	v := (*IStorageFile)(unsafe.Pointer(itf))
-//	return v.CopyOverload(destinationFolder, desiredNewName, option)
-//}
-//
-//func (impl *StorageFile) CopyAndReplaceAsync(fileToReplace *IStorageFile) (*foundation.IAsyncAction, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
-//	defer itf.Release()
-//	v := (*IStorageFile)(unsafe.Pointer(itf))
-//	return v.CopyAndReplaceAsync(fileToReplace)
-//}
-//
-//func (impl *StorageFile) MoveOverloadDefaultNameAndOptions(destinationFolder *IStorageFolder) (*foundation.IAsyncAction, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
-//	defer itf.Release()
-//	v := (*IStorageFile)(unsafe.Pointer(itf))
-//	return v.MoveOverloadDefaultNameAndOptions(destinationFolder)
-//}
-//
-//func (impl *StorageFile) MoveOverloadDefaultOptions(destinationFolder *IStorageFolder, desiredNewName string) (*foundation.IAsyncAction, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
-//	defer itf.Release()
-//	v := (*IStorageFile)(unsafe.Pointer(itf))
-//	return v.MoveOverloadDefaultOptions(destinationFolder, desiredNewName)
-//}
-//
-//func (impl *StorageFile) MoveOverload(destinationFolder *IStorageFolder, desiredNewName string, option NameCollisionOption) (*foundation.IAsyncAction, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
-//	defer itf.Release()
-//	v := (*IStorageFile)(unsafe.Pointer(itf))
-//	return v.MoveOverload(destinationFolder, desiredNewName, option)
-//}
-//
-//func (impl *StorageFile) MoveAndReplaceAsync(fileToReplace *IStorageFile) (*foundation.IAsyncAction, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
-//	defer itf.Release()
-//	v := (*IStorageFile)(unsafe.Pointer(itf))
-//	return v.MoveAndReplaceAsync(fileToReplace)
-//}
-//
-//func (impl *StorageFile) OpenSequentialReadAsync() (*foundation.IAsyncOperation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(streams.GUIDIInputStreamReference))
-//	defer itf.Release()
-//	v := (*streams.IInputStreamReference)(unsafe.Pointer(itf))
-//	return v.OpenSequentialReadAsync()
-//}
-//
-//func (impl *StorageFile) OpenReadAsync() (*foundation.IAsyncOperation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(streams.GUIDIRandomAccessStreamReference))
-//	defer itf.Release()
-//	v := (*streams.IRandomAccessStreamReference)(unsafe.Pointer(itf))
-//	return v.OpenReadAsync()
-//}
-//
-//func (impl *StorageFile) RenameAsyncOverloadDefaultOptions(desiredName string) (*foundation.IAsyncAction, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
-//	defer itf.Release()
-//	v := (*IStorageItem)(unsafe.Pointer(itf))
-//	return v.RenameAsyncOverloadDefaultOptions(desiredName)
-//}
-//
-//func (impl *StorageFile) RenameAsync(desiredName string, option NameCollisionOption) (*foundation.IAsyncAction, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
-//	defer itf.Release()
-//	v := (*IStorageItem)(unsafe.Pointer(itf))
-//	return v.RenameAsync(desiredName, option)
-//}
-//
-//func (impl *StorageFile) DeleteAsyncOverloadDefaultOptions() (*foundation.IAsyncAction, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
-//	defer itf.Release()
-//	v := (*IStorageItem)(unsafe.Pointer(itf))
-//	return v.DeleteAsyncOverloadDefaultOptions()
-//}
-//
-//func (impl *StorageFile) DeleteAsync(option StorageDeleteOption) (*foundation.IAsyncAction, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
-//	defer itf.Release()
-//	v := (*IStorageItem)(unsafe.Pointer(itf))
-//	return v.DeleteAsync(option)
-//}
-//
-//func (impl *StorageFile) GetBasicPropertiesAsync() (*foundation.IAsyncOperation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
-//	defer itf.Release()
-//	v := (*IStorageItem)(unsafe.Pointer(itf))
-//	return v.GetBasicPropertiesAsync()
-//}
-//
-//func (impl *StorageFile) GetName() (string, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
-//	defer itf.Release()
-//	v := (*IStorageItem)(unsafe.Pointer(itf))
-//	return v.GetName()
-//}
-//
-//func (impl *StorageFile) GetPath() (string, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
-//	defer itf.Release()
-//	v := (*IStorageItem)(unsafe.Pointer(itf))
-//	return v.GetPath()
-//}
-//
-//func (impl *StorageFile) GetAttributes() (FileAttributes, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
-//	defer itf.Release()
-//	v := (*IStorageItem)(unsafe.Pointer(itf))
-//	return v.GetAttributes()
-//}
-//
-//func (impl *StorageFile) GetDateCreated() (foundation.DateTime, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
-//	defer itf.Release()
-//	v := (*IStorageItem)(unsafe.Pointer(itf))
-//	return v.GetDateCreated()
-//}
-//
-//func (impl *StorageFile) IsOfType(mType StorageItemTypes) (bool, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
-//	defer itf.Release()
-//	v := (*IStorageItem)(unsafe.Pointer(itf))
-//	return v.IsOfType(mType)
-//}
-//
-//func (impl *StorageFile) GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode fileproperties.ThumbnailMode) (*foundation.IAsyncOperation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemProperties))
-//	defer itf.Release()
-//	v := (*IStorageItemProperties)(unsafe.Pointer(itf))
-//	return v.GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode)
-//}
-//
-//func (impl *StorageFile) GetThumbnailAsyncOverloadDefaultOptions(mode fileproperties.ThumbnailMode, requestedSize uint32) (*foundation.IAsyncOperation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemProperties))
-//	defer itf.Release()
-//	v := (*IStorageItemProperties)(unsafe.Pointer(itf))
-//	return v.GetThumbnailAsyncOverloadDefaultOptions(mode, requestedSize)
-//}
-//
-//func (impl *StorageFile) GetThumbnailAsync(mode fileproperties.ThumbnailMode, requestedSize uint32, options fileproperties.ThumbnailOptions) (*foundation.IAsyncOperation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemProperties))
-//	defer itf.Release()
-//	v := (*IStorageItemProperties)(unsafe.Pointer(itf))
-//	return v.GetThumbnailAsync(mode, requestedSize, options)
-//}
-//
-//func (impl *StorageFile) GetDisplayName() (string, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemProperties))
-//	defer itf.Release()
-//	v := (*IStorageItemProperties)(unsafe.Pointer(itf))
-//	return v.GetDisplayName()
-//}
-//
-//func (impl *StorageFile) GetDisplayType() (string, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemProperties))
-//	defer itf.Release()
-//	v := (*IStorageItemProperties)(unsafe.Pointer(itf))
-//	return v.GetDisplayType()
-//}
-//
-//func (impl *StorageFile) GetFolderRelativeId() (string, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemProperties))
-//	defer itf.Release()
-//	v := (*IStorageItemProperties)(unsafe.Pointer(itf))
-//	return v.GetFolderRelativeId()
-//}
-//
-//func (impl *StorageFile) GetProperties() (*fileproperties.StorageItemContentProperties, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemProperties))
-//	defer itf.Release()
-//	v := (*IStorageItemProperties)(unsafe.Pointer(itf))
-//	return v.GetProperties()
-//}
-//
-//func (impl *StorageFile) GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode fileproperties.ThumbnailMode) (*foundation.IAsyncOperation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemProperties2))
-//	defer itf.Release()
-//	v := (*IStorageItemProperties2)(unsafe.Pointer(itf))
-//	return v.GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode)
-//}
-//
-//func (impl *StorageFile) GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(mode fileproperties.ThumbnailMode, requestedSize uint32) (*foundation.IAsyncOperation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemProperties2))
-//	defer itf.Release()
-//	v := (*IStorageItemProperties2)(unsafe.Pointer(itf))
-//	return v.GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(mode, requestedSize)
-//}
-//
-//func (impl *StorageFile) GetScaledImageAsThumbnailAsync(mode fileproperties.ThumbnailMode, requestedSize uint32, options fileproperties.ThumbnailOptions) (*foundation.IAsyncOperation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemProperties2))
-//	defer itf.Release()
-//	v := (*IStorageItemProperties2)(unsafe.Pointer(itf))
-//	return v.GetScaledImageAsThumbnailAsync(mode, requestedSize, options)
-//}
-//
-//func (impl *StorageFile) GetParentAsync() (*foundation.IAsyncOperation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem2))
-//	defer itf.Release()
-//	v := (*IStorageItem2)(unsafe.Pointer(itf))
-//	return v.GetParentAsync()
-//}
-//
-//func (impl *StorageFile) IsEqual(item *IStorageItem) (bool, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem2))
-//	defer itf.Release()
-//	v := (*IStorageItem2)(unsafe.Pointer(itf))
-//	return v.IsEqual(item)
-//}
-//
-//func (impl *StorageFile) GetProvider() (*StorageProvider, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemPropertiesWithProvider))
-//	defer itf.Release()
-//	v := (*IStorageItemPropertiesWithProvider)(unsafe.Pointer(itf))
-//	return v.GetProvider()
-//}
-//
-//func (impl *StorageFile) GetIsAvailable() (bool, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFilePropertiesWithAvailability))
-//	defer itf.Release()
-//	v := (*IStorageFilePropertiesWithAvailability)(unsafe.Pointer(itf))
-//	return v.GetIsAvailable()
-//}
-//
-//func (impl *StorageFile) OpenWithOptionsAsync(accessMode FileAccessMode, options StorageOpenOptions) (*foundation.IAsyncOperation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile2))
-//	defer itf.Release()
-//	v := (*IStorageFile2)(unsafe.Pointer(itf))
-//	return v.OpenWithOptionsAsync(accessMode, options)
-//}
-//
-//func (impl *StorageFile) OpenTransactedWriteWithOptionsAsync(options StorageOpenOptions) (*foundation.IAsyncOperation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile2))
-//	defer itf.Release()
-//	v := (*IStorageFile2)(unsafe.Pointer(itf))
-//	return v.OpenTransactedWriteWithOptionsAsync(options)
-//}
+func (impl *StorageFile) CopyOverloadDefaultNameAndOptions(destinationFolder *IStorageFolder) (*foundation.IAsyncOperation, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
+	defer itf.Release()
+	v := (*IStorageFile)(unsafe.Pointer(itf))
+	return v.CopyOverloadDefaultNameAndOptions(destinationFolder)
+}
+
+func (impl *StorageFile) CopyOverloadDefaultOptions(destinationFolder *IStorageFolder, desiredNewName string) (*foundation.IAsyncOperation, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
+	defer itf.Release()
+	v := (*IStorageFile)(unsafe.Pointer(itf))
+	return v.CopyOverloadDefaultOptions(destinationFolder, desiredNewName)
+}
+
+func (impl *StorageFile) CopyOverload(destinationFolder *IStorageFolder, desiredNewName string, option NameCollisionOption) (*foundation.IAsyncOperation, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
+	defer itf.Release()
+	v := (*IStorageFile)(unsafe.Pointer(itf))
+	return v.CopyOverload(destinationFolder, desiredNewName, option)
+}
+
+func (impl *StorageFile) CopyAndReplaceAsync(fileToReplace *IStorageFile) (*foundation.IAsyncAction, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
+	defer itf.Release()
+	v := (*IStorageFile)(unsafe.Pointer(itf))
+	return v.CopyAndReplaceAsync(fileToReplace)
+}
+
+func (impl *StorageFile) MoveOverloadDefaultNameAndOptions(destinationFolder *IStorageFolder) (*foundation.IAsyncAction, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
+	defer itf.Release()
+	v := (*IStorageFile)(unsafe.Pointer(itf))
+	return v.MoveOverloadDefaultNameAndOptions(destinationFolder)
+}
+
+func (impl *StorageFile) MoveOverloadDefaultOptions(destinationFolder *IStorageFolder, desiredNewName string) (*foundation.IAsyncAction, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
+	defer itf.Release()
+	v := (*IStorageFile)(unsafe.Pointer(itf))
+	return v.MoveOverloadDefaultOptions(destinationFolder, desiredNewName)
+}
+
+func (impl *StorageFile) MoveOverload(destinationFolder *IStorageFolder, desiredNewName string, option NameCollisionOption) (*foundation.IAsyncAction, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
+	defer itf.Release()
+	v := (*IStorageFile)(unsafe.Pointer(itf))
+	return v.MoveOverload(destinationFolder, desiredNewName, option)
+}
+
+func (impl *StorageFile) MoveAndReplaceAsync(fileToReplace *IStorageFile) (*foundation.IAsyncAction, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile))
+	defer itf.Release()
+	v := (*IStorageFile)(unsafe.Pointer(itf))
+	return v.MoveAndReplaceAsync(fileToReplace)
+}
+
+func (impl *StorageFile) OpenSequentialReadAsync() (*foundation.IAsyncOperation, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(streams.GUIDIInputStreamReference))
+	defer itf.Release()
+	v := (*streams.IInputStreamReference)(unsafe.Pointer(itf))
+	return v.OpenSequentialReadAsync()
+}
+
+func (impl *StorageFile) OpenReadAsync() (*foundation.IAsyncOperation, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(streams.GUIDIRandomAccessStreamReference))
+	defer itf.Release()
+	v := (*streams.IRandomAccessStreamReference)(unsafe.Pointer(itf))
+	return v.OpenReadAsync()
+}
+
+func (impl *StorageFile) RenameAsyncOverloadDefaultOptions(desiredName string) (*foundation.IAsyncAction, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
+	defer itf.Release()
+	v := (*IStorageItem)(unsafe.Pointer(itf))
+	return v.RenameAsyncOverloadDefaultOptions(desiredName)
+}
+
+func (impl *StorageFile) RenameAsync(desiredName string, option NameCollisionOption) (*foundation.IAsyncAction, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
+	defer itf.Release()
+	v := (*IStorageItem)(unsafe.Pointer(itf))
+	return v.RenameAsync(desiredName, option)
+}
+
+func (impl *StorageFile) DeleteAsyncOverloadDefaultOptions() (*foundation.IAsyncAction, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
+	defer itf.Release()
+	v := (*IStorageItem)(unsafe.Pointer(itf))
+	return v.DeleteAsyncOverloadDefaultOptions()
+}
+
+func (impl *StorageFile) DeleteAsync(option StorageDeleteOption) (*foundation.IAsyncAction, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
+	defer itf.Release()
+	v := (*IStorageItem)(unsafe.Pointer(itf))
+	return v.DeleteAsync(option)
+}
+
+func (impl *StorageFile) GetBasicPropertiesAsync() (*foundation.IAsyncOperation, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
+	defer itf.Release()
+	v := (*IStorageItem)(unsafe.Pointer(itf))
+	return v.GetBasicPropertiesAsync()
+}
+
+func (impl *StorageFile) GetName() (string, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
+	defer itf.Release()
+	v := (*IStorageItem)(unsafe.Pointer(itf))
+	return v.GetName()
+}
+
+func (impl *StorageFile) GetPath() (string, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
+	defer itf.Release()
+	v := (*IStorageItem)(unsafe.Pointer(itf))
+	return v.GetPath()
+}
+
+func (impl *StorageFile) GetAttributes() (FileAttributes, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
+	defer itf.Release()
+	v := (*IStorageItem)(unsafe.Pointer(itf))
+	return v.GetAttributes()
+}
+
+func (impl *StorageFile) GetDateCreated() (foundation.DateTime, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
+	defer itf.Release()
+	v := (*IStorageItem)(unsafe.Pointer(itf))
+	return v.GetDateCreated()
+}
+
+func (impl *StorageFile) IsOfType(mType StorageItemTypes) (bool, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem))
+	defer itf.Release()
+	v := (*IStorageItem)(unsafe.Pointer(itf))
+	return v.IsOfType(mType)
+}
+
+func (impl *StorageFile) GetThumbnailAsync(mode fileproperties.ThumbnailMode, requestedSize uint32, options fileproperties.ThumbnailOptions) (*foundation.IAsyncOperation, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemProperties))
+	defer itf.Release()
+	v := (*IStorageItemProperties)(unsafe.Pointer(itf))
+	return v.GetThumbnailAsync(mode, requestedSize, options)
+}
+
+func (impl *StorageFile) GetDisplayName() (string, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemProperties))
+	defer itf.Release()
+	v := (*IStorageItemProperties)(unsafe.Pointer(itf))
+	return v.GetDisplayName()
+}
+
+func (impl *StorageFile) GetDisplayType() (string, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemProperties))
+	defer itf.Release()
+	v := (*IStorageItemProperties)(unsafe.Pointer(itf))
+	return v.GetDisplayType()
+}
+
+func (impl *StorageFile) GetFolderRelativeId() (string, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemProperties))
+	defer itf.Release()
+	v := (*IStorageItemProperties)(unsafe.Pointer(itf))
+	return v.GetFolderRelativeId()
+}
+
+func (impl *StorageFile) GetProperties() (*fileproperties.StorageItemContentProperties, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemProperties))
+	defer itf.Release()
+	v := (*IStorageItemProperties)(unsafe.Pointer(itf))
+	return v.GetProperties()
+}
+
+func (impl *StorageFile) GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(mode fileproperties.ThumbnailMode, requestedSize uint32) (*foundation.IAsyncOperation, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemProperties2))
+	defer itf.Release()
+	v := (*IStorageItemProperties2)(unsafe.Pointer(itf))
+	return v.GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(mode, requestedSize)
+}
+
+func (impl *StorageFile) GetScaledImageAsThumbnailAsync(mode fileproperties.ThumbnailMode, requestedSize uint32, options fileproperties.ThumbnailOptions) (*foundation.IAsyncOperation, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemProperties2))
+	defer itf.Release()
+	v := (*IStorageItemProperties2)(unsafe.Pointer(itf))
+	return v.GetScaledImageAsThumbnailAsync(mode, requestedSize, options)
+}
+
+func (impl *StorageFile) GetParentAsync() (*foundation.IAsyncOperation, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem2))
+	defer itf.Release()
+	v := (*IStorageItem2)(unsafe.Pointer(itf))
+	return v.GetParentAsync()
+}
+
+func (impl *StorageFile) IsEqual(item *IStorageItem) (bool, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItem2))
+	defer itf.Release()
+	v := (*IStorageItem2)(unsafe.Pointer(itf))
+	return v.IsEqual(item)
+}
+
+func (impl *StorageFile) GetProvider() (*StorageProvider, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemPropertiesWithProvider))
+	defer itf.Release()
+	v := (*IStorageItemPropertiesWithProvider)(unsafe.Pointer(itf))
+	return v.GetProvider()
+}
+
+func (impl *StorageFile) GetIsAvailable() (bool, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFilePropertiesWithAvailability))
+	defer itf.Release()
+	v := (*IStorageFilePropertiesWithAvailability)(unsafe.Pointer(itf))
+	return v.GetIsAvailable()
+}
+
+func (impl *StorageFile) OpenWithOptionsAsync(accessMode FileAccessMode, options StorageOpenOptions) (*foundation.IAsyncOperation, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile2))
+	defer itf.Release()
+	v := (*IStorageFile2)(unsafe.Pointer(itf))
+	return v.OpenWithOptionsAsync(accessMode, options)
+}
+
+func (impl *StorageFile) OpenTransactedWriteWithOptionsAsync(options StorageOpenOptions) (*foundation.IAsyncOperation, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageFile2))
+	defer itf.Release()
+	v := (*IStorageFile2)(unsafe.Pointer(itf))
+	return v.OpenTransactedWriteWithOptionsAsync(options)
+}
 
 const GUIDiStorageFileStatics string = "5984c710-daf2-43c8-8bb4-a4d3eacfd03f"
 const SignatureiStorageFileStatics string = "{5984c710-daf2-43c8-8bb4-a4d3eacfd03f}"
@@ -369,109 +351,109 @@ func StorageFileGetFileFromApplicationUriAsync(uri *foundation.Uri) (*foundation
 	return out, nil
 }
 
-//func StorageFileCreateStreamedFileAsync(displayNameWithExtension string, dataRequested *StreamedFileDataRequestedHandler, thumbnail *streams.IRandomAccessStreamReference) (*foundation.IAsyncOperation, error) {
-//	inspectable, err := ole.RoGetActivationFactory("Windows.Storage.StorageFile", ole.NewGUID(GUIDiStorageFileStatics))
-//	if err != nil {
-//		return nil, err
-//	}
-//	v := (*iStorageFileStatics)(unsafe.Pointer(inspectable))
-//
-//	var out *foundation.IAsyncOperation
-//	displayNameWithExtensionHStr, err := ole.NewHString(displayNameWithExtension)
-//	if err != nil {
-//		return nil, err
-//	}
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().StorageFileCreateStreamedFileAsync,
-//		0,                                      // this is a static func, so there's no this
-//		uintptr(displayNameWithExtensionHStr),  // in string
-//		uintptr(unsafe.Pointer(dataRequested)), // in StreamedFileDataRequestedHandler
-//		uintptr(unsafe.Pointer(thumbnail)),     // in streams.IRandomAccessStreamReference
-//		uintptr(unsafe.Pointer(&out)),          // out foundation.IAsyncOperation
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+func StorageFileCreateStreamedFileAsync(displayNameWithExtension string, dataRequested *StreamedFileDataRequestedHandler, thumbnail *streams.IRandomAccessStreamReference) (*foundation.IAsyncOperation, error) {
+	inspectable, err := ole.RoGetActivationFactory("Windows.Storage.StorageFile", ole.NewGUID(GUIDiStorageFileStatics))
+	if err != nil {
+		return nil, err
+	}
+	v := (*iStorageFileStatics)(unsafe.Pointer(inspectable))
 
-//func StorageFileReplaceWithStreamedFileAsync(fileToReplace *IStorageFile, dataRequested *StreamedFileDataRequestedHandler, thumbnail *streams.IRandomAccessStreamReference) (*foundation.IAsyncOperation, error) {
-//	inspectable, err := ole.RoGetActivationFactory("Windows.Storage.StorageFile", ole.NewGUID(GUIDiStorageFileStatics))
-//	if err != nil {
-//		return nil, err
-//	}
-//	v := (*iStorageFileStatics)(unsafe.Pointer(inspectable))
-//
-//	var out *foundation.IAsyncOperation
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().StorageFileReplaceWithStreamedFileAsync,
-//		0,                                      // this is a static func, so there's no this
-//		uintptr(unsafe.Pointer(fileToReplace)), // in IStorageFile
-//		uintptr(unsafe.Pointer(dataRequested)), // in StreamedFileDataRequestedHandler
-//		uintptr(unsafe.Pointer(thumbnail)),     // in streams.IRandomAccessStreamReference
-//		uintptr(unsafe.Pointer(&out)),          // out foundation.IAsyncOperation
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+	var out *foundation.IAsyncOperation
+	displayNameWithExtensionHStr, err := ole.NewHString(displayNameWithExtension)
+	if err != nil {
+		return nil, err
+	}
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().StorageFileCreateStreamedFileAsync,
+		0,                                      // this is a static func, so there's no this
+		uintptr(displayNameWithExtensionHStr),  // in string
+		uintptr(unsafe.Pointer(dataRequested)), // in StreamedFileDataRequestedHandler
+		uintptr(unsafe.Pointer(thumbnail)),     // in streams.IRandomAccessStreamReference
+		uintptr(unsafe.Pointer(&out)),          // out foundation.IAsyncOperation
+	)
 
-//func StorageFileCreateStreamedFileFromUriAsync(displayNameWithExtension string, uri *foundation.Uri, thumbnail *streams.IRandomAccessStreamReference) (*foundation.IAsyncOperation, error) {
-//	inspectable, err := ole.RoGetActivationFactory("Windows.Storage.StorageFile", ole.NewGUID(GUIDiStorageFileStatics))
-//	if err != nil {
-//		return nil, err
-//	}
-//	v := (*iStorageFileStatics)(unsafe.Pointer(inspectable))
-//
-//	var out *foundation.IAsyncOperation
-//	displayNameWithExtensionHStr, err := ole.NewHString(displayNameWithExtension)
-//	if err != nil {
-//		return nil, err
-//	}
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().StorageFileCreateStreamedFileFromUriAsync,
-//		0,                                     // this is a static func, so there's no this
-//		uintptr(displayNameWithExtensionHStr), // in string
-//		uintptr(unsafe.Pointer(uri)),          // in foundation.Uri
-//		uintptr(unsafe.Pointer(thumbnail)),    // in streams.IRandomAccessStreamReference
-//		uintptr(unsafe.Pointer(&out)),         // out foundation.IAsyncOperation
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
 
-//func StorageFileReplaceWithStreamedFileFromUriAsync(fileToReplace *IStorageFile, uri *foundation.Uri, thumbnail *streams.IRandomAccessStreamReference) (*foundation.IAsyncOperation, error) {
-//	inspectable, err := ole.RoGetActivationFactory("Windows.Storage.StorageFile", ole.NewGUID(GUIDiStorageFileStatics))
-//	if err != nil {
-//		return nil, err
-//	}
-//	v := (*iStorageFileStatics)(unsafe.Pointer(inspectable))
-//
-//	var out *foundation.IAsyncOperation
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().StorageFileReplaceWithStreamedFileFromUriAsync,
-//		0,                                      // this is a static func, so there's no this
-//		uintptr(unsafe.Pointer(fileToReplace)), // in IStorageFile
-//		uintptr(unsafe.Pointer(uri)),           // in foundation.Uri
-//		uintptr(unsafe.Pointer(thumbnail)),     // in streams.IRandomAccessStreamReference
-//		uintptr(unsafe.Pointer(&out)),          // out foundation.IAsyncOperation
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+	return out, nil
+}
+
+func StorageFileReplaceWithStreamedFileAsync(fileToReplace *IStorageFile, dataRequested *StreamedFileDataRequestedHandler, thumbnail *streams.IRandomAccessStreamReference) (*foundation.IAsyncOperation, error) {
+	inspectable, err := ole.RoGetActivationFactory("Windows.Storage.StorageFile", ole.NewGUID(GUIDiStorageFileStatics))
+	if err != nil {
+		return nil, err
+	}
+	v := (*iStorageFileStatics)(unsafe.Pointer(inspectable))
+
+	var out *foundation.IAsyncOperation
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().StorageFileReplaceWithStreamedFileAsync,
+		0,                                      // this is a static func, so there's no this
+		uintptr(unsafe.Pointer(fileToReplace)), // in IStorageFile
+		uintptr(unsafe.Pointer(dataRequested)), // in StreamedFileDataRequestedHandler
+		uintptr(unsafe.Pointer(thumbnail)),     // in streams.IRandomAccessStreamReference
+		uintptr(unsafe.Pointer(&out)),          // out foundation.IAsyncOperation
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
+
+func StorageFileCreateStreamedFileFromUriAsync(displayNameWithExtension string, uri *foundation.Uri, thumbnail *streams.IRandomAccessStreamReference) (*foundation.IAsyncOperation, error) {
+	inspectable, err := ole.RoGetActivationFactory("Windows.Storage.StorageFile", ole.NewGUID(GUIDiStorageFileStatics))
+	if err != nil {
+		return nil, err
+	}
+	v := (*iStorageFileStatics)(unsafe.Pointer(inspectable))
+
+	var out *foundation.IAsyncOperation
+	displayNameWithExtensionHStr, err := ole.NewHString(displayNameWithExtension)
+	if err != nil {
+		return nil, err
+	}
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().StorageFileCreateStreamedFileFromUriAsync,
+		0,                                     // this is a static func, so there's no this
+		uintptr(displayNameWithExtensionHStr), // in string
+		uintptr(unsafe.Pointer(uri)),          // in foundation.Uri
+		uintptr(unsafe.Pointer(thumbnail)),    // in streams.IRandomAccessStreamReference
+		uintptr(unsafe.Pointer(&out)),         // out foundation.IAsyncOperation
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
+
+func StorageFileReplaceWithStreamedFileFromUriAsync(fileToReplace *IStorageFile, uri *foundation.Uri, thumbnail *streams.IRandomAccessStreamReference) (*foundation.IAsyncOperation, error) {
+	inspectable, err := ole.RoGetActivationFactory("Windows.Storage.StorageFile", ole.NewGUID(GUIDiStorageFileStatics))
+	if err != nil {
+		return nil, err
+	}
+	v := (*iStorageFileStatics)(unsafe.Pointer(inspectable))
+
+	var out *foundation.IAsyncOperation
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().StorageFileReplaceWithStreamedFileFromUriAsync,
+		0,                                      // this is a static func, so there's no this
+		uintptr(unsafe.Pointer(fileToReplace)), // in IStorageFile
+		uintptr(unsafe.Pointer(uri)),           // in foundation.Uri
+		uintptr(unsafe.Pointer(thumbnail)),     // in streams.IRandomAccessStreamReference
+		uintptr(unsafe.Pointer(&out)),          // out foundation.IAsyncOperation
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}
 
 const GUIDiStorageFileStatics2 string = "5c76a781-212e-4af9-8f04-740cae108974"
 const SignatureiStorageFileStatics2 string = "{5c76a781-212e-4af9-8f04-740cae108974}"
@@ -490,29 +472,29 @@ func (v *iStorageFileStatics2) VTable() *iStorageFileStatics2Vtbl {
 	return (*iStorageFileStatics2Vtbl)(unsafe.Pointer(v.RawVTable))
 }
 
-//func StorageFileGetFileFromPathForUserAsync(user *system.User, path string) (*foundation.IAsyncOperation, error) {
-//	inspectable, err := ole.RoGetActivationFactory("Windows.Storage.StorageFile", ole.NewGUID(GUIDiStorageFileStatics2))
-//	if err != nil {
-//		return nil, err
-//	}
-//	v := (*iStorageFileStatics2)(unsafe.Pointer(inspectable))
-//
-//	var out *foundation.IAsyncOperation
-//	pathHStr, err := ole.NewHString(path)
-//	if err != nil {
-//		return nil, err
-//	}
-//	hr, _, _ := syscall.SyscallN(
-//		v.VTable().StorageFileGetFileFromPathForUserAsync,
-//		0,                             // this is a static func, so there's no this
-//		uintptr(unsafe.Pointer(user)), // in system.User
-//		uintptr(pathHStr),             // in string
-//		uintptr(unsafe.Pointer(&out)), // out foundation.IAsyncOperation
-//	)
-//
-//	if hr != 0 {
-//		return nil, ole.NewError(hr)
-//	}
-//
-//	return out, nil
-//}
+func StorageFileGetFileFromPathForUserAsync(user *system.User, path string) (*foundation.IAsyncOperation, error) {
+	inspectable, err := ole.RoGetActivationFactory("Windows.Storage.StorageFile", ole.NewGUID(GUIDiStorageFileStatics2))
+	if err != nil {
+		return nil, err
+	}
+	v := (*iStorageFileStatics2)(unsafe.Pointer(inspectable))
+
+	var out *foundation.IAsyncOperation
+	pathHStr, err := ole.NewHString(path)
+	if err != nil {
+		return nil, err
+	}
+	hr, _, _ := syscall.SyscallN(
+		v.VTable().StorageFileGetFileFromPathForUserAsync,
+		0,                             // this is a static func, so there's no this
+		uintptr(unsafe.Pointer(user)), // in system.User
+		uintptr(pathHStr),             // in string
+		uintptr(unsafe.Pointer(&out)), // out foundation.IAsyncOperation
+	)
+
+	if hr != 0 {
+		return nil, ole.NewError(hr)
+	}
+
+	return out, nil
+}

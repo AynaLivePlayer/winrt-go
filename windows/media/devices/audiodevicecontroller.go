@@ -10,6 +10,10 @@ import (
 	"unsafe"
 
 	"github.com/go-ole/go-ole"
+	"github.com/saltosystems/winrt-go/windows/foundation"
+	"github.com/saltosystems/winrt-go/windows/foundation/collections"
+	"github.com/saltosystems/winrt-go/windows/media/capture"
+	"github.com/saltosystems/winrt-go/windows/media/mediaproperties"
 )
 
 const SignatureAudioDeviceController string = "rc(Windows.Media.Devices.AudioDeviceController;{edd4a388-79c7-4f7c-90e8-ef934b21580a})"
@@ -46,6 +50,26 @@ func (impl *AudioDeviceController) GetVolumePercent() (float32, error) {
 	return v.GetVolumePercent()
 }
 
+func (impl *AudioDeviceController) GetAvailableMediaStreamProperties(mediaStreamType capture.MediaStreamType) (*collections.IVectorView, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIMediaDeviceController))
+	defer itf.Release()
+	v := (*IMediaDeviceController)(unsafe.Pointer(itf))
+	return v.GetAvailableMediaStreamProperties(mediaStreamType)
+}
+
+func (impl *AudioDeviceController) GetMediaStreamProperties(mediaStreamType capture.MediaStreamType) (*mediaproperties.IMediaEncodingProperties, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIMediaDeviceController))
+	defer itf.Release()
+	v := (*IMediaDeviceController)(unsafe.Pointer(itf))
+	return v.GetMediaStreamProperties(mediaStreamType)
+}
+
+func (impl *AudioDeviceController) SetMediaStreamPropertiesAsync(mediaStreamType capture.MediaStreamType, mediaEncodingProperties *mediaproperties.IMediaEncodingProperties) (*foundation.IAsyncAction, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIMediaDeviceController))
+	defer itf.Release()
+	v := (*IMediaDeviceController)(unsafe.Pointer(itf))
+	return v.SetMediaStreamPropertiesAsync(mediaStreamType, mediaEncodingProperties)
+}
 
 const GUIDiAudioDeviceController string = "edd4a388-79c7-4f7c-90e8-ef934b21580a"
 const SignatureiAudioDeviceController string = "{edd4a388-79c7-4f7c-90e8-ef934b21580a}"

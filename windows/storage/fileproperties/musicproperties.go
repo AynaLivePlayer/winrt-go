@@ -195,26 +195,26 @@ func (impl *MusicProperties) SetYear(value uint32) error {
 	return v.SetYear(value)
 }
 
-//func (impl *MusicProperties) RetrievePropertiesAsync(propertiesToRetrieve *collections.IIterable) (*foundation.IAsyncOperation, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemExtraProperties))
-//	defer itf.Release()
-//	v := (*IStorageItemExtraProperties)(unsafe.Pointer(itf))
-//	return v.RetrievePropertiesAsync(propertiesToRetrieve)
-//}
-//
-//func (impl *MusicProperties) SavePropertiesAsync(propertiesToSave *collections.IIterable) (*foundation.IAsyncAction, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemExtraProperties))
-//	defer itf.Release()
-//	v := (*IStorageItemExtraProperties)(unsafe.Pointer(itf))
-//	return v.SavePropertiesAsync(propertiesToSave)
-//}
-//
-//func (impl *MusicProperties) SavePropertiesAsyncOverloadDefault() (*foundation.IAsyncAction, error) {
-//	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemExtraProperties))
-//	defer itf.Release()
-//	v := (*IStorageItemExtraProperties)(unsafe.Pointer(itf))
-//	return v.SavePropertiesAsyncOverloadDefault()
-//}
+func (impl *MusicProperties) RetrievePropertiesAsync(propertiesToRetrieve *collections.IIterable) (*foundation.IAsyncOperation, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemExtraProperties))
+	defer itf.Release()
+	v := (*IStorageItemExtraProperties)(unsafe.Pointer(itf))
+	return v.RetrievePropertiesAsync(propertiesToRetrieve)
+}
+
+func (impl *MusicProperties) SavePropertiesAsync(propertiesToSave *collections.IIterable) (*foundation.IAsyncAction, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemExtraProperties))
+	defer itf.Release()
+	v := (*IStorageItemExtraProperties)(unsafe.Pointer(itf))
+	return v.SavePropertiesAsync(propertiesToSave)
+}
+
+func (impl *MusicProperties) SavePropertiesAsyncOverloadDefault() (*foundation.IAsyncAction, error) {
+	itf := impl.MustQueryInterface(ole.NewGUID(GUIDIStorageItemExtraProperties))
+	defer itf.Release()
+	v := (*IStorageItemExtraProperties)(unsafe.Pointer(itf))
+	return v.SavePropertiesAsyncOverloadDefault()
+}
 
 const GUIDiMusicProperties string = "bc8aab62-66ec-419a-bc5d-ca65a4cb46da"
 const SignatureiMusicProperties string = "{bc8aab62-66ec-419a-bc5d-ca65a4cb46da}"
