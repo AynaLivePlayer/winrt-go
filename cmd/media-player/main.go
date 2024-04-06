@@ -1,10 +1,13 @@
 package main
 
 import (
+	"path/filepath"
+	"runtime"
 	"time"
 	"unsafe"
 
 	"github.com/go-ole/go-ole"
+
 	"github.com/saltosystems/winrt-go/windows/foundation"
 	"github.com/saltosystems/winrt-go/windows/media/core"
 	"github.com/saltosystems/winrt-go/windows/media/playback"
@@ -16,7 +19,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	uri, err := foundation.UriCreateUri("http://m801.music.126.net/20240406002338/cb697f571b59a1f6f635b53dcbfffd48/jdyyaac/obj/w5rDlsOJwrLDjj7CmsOj/20161325709/cf66/e916/8bf0/4e906e7aec4cbc4a504136e0473b4706.m4a")
+
+	_, path, _, _ := runtime.Caller(0)
+	uri, err := foundation.UriCreateUri("file:///" + filepath.Dir(path) + "/a.flac")
 	if err != nil {
 		panic(err)
 	}
