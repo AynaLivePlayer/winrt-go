@@ -60,6 +60,10 @@ hr, _, _ := syscall.SyscallN(
                 uintptr(*(*byte)(unsafe.Pointer(&{{.GoVarName}}))),   // in {{.GoTypeName}}
             {{ else if eq .GoTypeName "string" -}}
                 uintptr({{.GoVarName}}HStr),   // in {{.GoTypeName}}
+            {{ else if eq .GoTypeName "float64" -}}
+                uintptr(math.Float64bits({{.GoVarName}})),   // in {{.GoTypeName}}
+            {{ else if eq .GoTypeName "float32" -}}
+                uintptr(math.Float32bits({{.GoVarName}})),   // in {{.GoTypeName}}
             {{else -}}
                 uintptr({{.GoVarName}}),   // in {{.GoTypeName}}
             {{end -}}

@@ -44,7 +44,8 @@ func main() {
 	defer s.Release()
 
 	must0(p.SetSource((*playback.IMediaPlaybackSource)(unsafe.Pointer(s))))
-	//must0(p.SetVolume(0.8))
+	must0(p.SetVolume(0.5))
+	fmt.Println(p.GetVolume())
 	must0(p.SetAudioCategory(playback.MediaPlayerAudioCategoryMedia))
 
 	eventReceivedGuid := winrt.ParameterizedInstanceGUID(
