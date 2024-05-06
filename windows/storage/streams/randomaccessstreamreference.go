@@ -11,7 +11,6 @@ import (
 
 	"github.com/go-ole/go-ole"
 	"github.com/saltosystems/winrt-go/windows/foundation"
-	"github.com/saltosystems/winrt-go/windows/storage"
 )
 
 const SignatureRandomAccessStreamReference string = "rc(Windows.Storage.Streams.RandomAccessStreamReference;{33ee3134-1dd6-4e3a-8067-d1c162e8642b})"
@@ -44,28 +43,6 @@ type iRandomAccessStreamReferenceStaticsVtbl struct {
 
 func (v *iRandomAccessStreamReferenceStatics) VTable() *iRandomAccessStreamReferenceStaticsVtbl {
 	return (*iRandomAccessStreamReferenceStaticsVtbl)(unsafe.Pointer(v.RawVTable))
-}
-
-func RandomAccessStreamReferenceCreateFromFile(file *storage.IStorageFile) (*RandomAccessStreamReference, error) {
-	inspectable, err := ole.RoGetActivationFactory("Windows.Storage.Streams.RandomAccessStreamReference", ole.NewGUID(GUIDiRandomAccessStreamReferenceStatics))
-	if err != nil {
-		return nil, err
-	}
-	v := (*iRandomAccessStreamReferenceStatics)(unsafe.Pointer(inspectable))
-
-	var out *RandomAccessStreamReference
-	hr, _, _ := syscall.SyscallN(
-		v.VTable().RandomAccessStreamReferenceCreateFromFile,
-		0,                             // this is a static func, so there's no this
-		uintptr(unsafe.Pointer(file)), // in storage.IStorageFile
-		uintptr(unsafe.Pointer(&out)), // out RandomAccessStreamReference
-	)
-
-	if hr != 0 {
-		return nil, ole.NewError(hr)
-	}
-
-	return out, nil
 }
 
 func RandomAccessStreamReferenceCreateFromUri(uri *foundation.Uri) (*RandomAccessStreamReference, error) {
