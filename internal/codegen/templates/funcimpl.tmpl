@@ -69,6 +69,8 @@ hr, _, _ := syscall.SyscallN(
             {{end -}}
         {{else if .Type.IsGeneric -}}
             uintptr({{.GoVarName}}),   // in {{.GoTypeName}}
+        {{else if eq .GoTypeName "foundation.TimeSpan" -}}
+            uintptr({{.GoVarName}}.Duration),   // in {{.GoTypeName}}
         {{else -}}
             uintptr(unsafe.Pointer(&{{.GoVarName}})),   // in {{.GoTypeName}}
         {{end -}}
